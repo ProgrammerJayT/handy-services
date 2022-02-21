@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from '../screens/Splash';
 import Login from '../screens/Login';
 import Home from '../screens/Home';
-import Registration from '../screens/Registration';
+import Request from '../screens/Request';
 
 const Stack = createNativeStackNavigator();
 
@@ -14,8 +14,8 @@ function RouteStack() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Registration" component={Registration} />
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Request" component={Request} />
       </Stack.Navigator>
     </NavigationContainer>
   );
