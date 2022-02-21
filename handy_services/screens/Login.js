@@ -7,12 +7,26 @@ import {
   BackHandler,
   Alert,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {openDatabase} from 'react-native-sqlite-storage';
+import LottieView from 'lottie-react-native';
 
 const Login = ({navigation}) => {
   const [user, setUser] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        'hardwareBackPress',
+        handleBackButtonClick,
+      );
+    };
+  }, [user]);
 
   const SetProvider = () => {
     setUser('provider');
@@ -25,8 +39,47 @@ const Login = ({navigation}) => {
   const RegForm = () => {
     return (
       <View style={{width: '100%', flex: 1}}>
-        <Text style={styles.reg_user}>Registering as a {user}</Text>
-        <ScrollView contentContainerStyle={styles.scroller}></ScrollView>
+        <Text style={styles.reg_user}>
+          {user.charAt(0).toUpperCase() + user.slice(1)} sign in
+        </Text>
+        <ScrollView contentContainerStyle={styles.scroller}>
+          <LottieView
+            style={styles.lottie}
+            source={require('../res/lottie/login_animation.json')}
+            autoPlay
+            loop
+          />
+          <LottieView
+            style={styles.auth}
+            source={require('../res/lottie/email.json')}
+            autoPlay
+            loop
+          />
+
+          <TextInput
+            style={styles.input}
+            onChangeText={setEmail}
+            value={email}
+            placeholder="email address"
+            keyboardType='email-address'
+          />
+          <LottieView
+            style={styles.auth}
+            source={require('../res/lottie/password.json')}
+            autoPlay
+            loop
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setPassword}
+            value={password}
+            placeholder="password"
+            secureTextEntry={true}
+          />
+          <TouchableOpacity style = {{alignItems: 'center', marginTop: 20}}>
+            <Text style={{color: '#3a3a3a', padding: 10}}>Recover password</Text>
+          </TouchableOpacity>
+        </ScrollView>
         <TouchableOpacity style={styles.submit}>
           <Text style={styles.serv_text}>Submit</Text>
         </TouchableOpacity>
@@ -44,16 +97,6 @@ const Login = ({navigation}) => {
     }
     return true;
   }
-
-  useEffect(() => {
-    BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-    return () => {
-      BackHandler.removeEventListener(
-        'hardwareBackPress',
-        handleBackButtonClick,
-      );
-    };
-  }, []);
 
   return (
     <SafeAreaView style={styles.body}>
@@ -136,14 +179,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   reg_user: {
-    backgroundColor: 'black',
-    borderTopRightRadius: 20,
-    borderBottomRightRadius: 20,
+    backgroundColor: '#3a3a3a',
+    borderRadius: 5,
     color: 'white',
     fontSize: 20,
     padding: 10,
     marginTop: 10,
-    alignSelf: 'flex-start',
+    alignSelf: 'center',
+    width: '95%',
+    textAlign: 'center',
   },
 
   submit: {
@@ -156,11 +200,31 @@ const styles = StyleSheet.create({
   },
 
   scroller: {
-      backgroundColor: '#f2f0f2',
-      width: '95%',
-      flex: 1,
-      alignSelf: 'center',
-      borderRadius: 10,
-      marginTop: 10,
-  }
+    width: '95%',
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginTop: 10,
+  },
+
+  lottie: {
+    height: 250,
+    alignSelf: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  input: {
+    height: 50,
+    marginHorizontal: 20,
+    borderWidth: 0.5,
+    padding: 10,
+    borderRadius: 20,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+
+  auth: {
+    height: 70,
+    alignSelf: 'center',
+  },
 });

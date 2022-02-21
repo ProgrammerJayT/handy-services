@@ -6,7 +6,7 @@ const Splash = ({navigation}) => {
 
     setTimeout(() => {
         navigation.navigate('Login');
-    }, 1000);
+    }, 2000);
 
   return (
     <SafeAreaView style={styles.body}>
