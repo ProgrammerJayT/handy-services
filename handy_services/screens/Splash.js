@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 const Splash = ({navigation}) => {
 
     setTimeout(() => {
-        navigation.navigate('Login');
+        navigation.navigate('UserType');
     }, 2000);
 
   return (

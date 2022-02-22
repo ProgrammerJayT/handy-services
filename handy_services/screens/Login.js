@@ -21,7 +21,7 @@ const Login = ({navigation}) => {
   console.log('User? : ' + user);
 
   const gotoHome = () => {
-    navigation.navigate('Home');
+    navigation.navigate('CustomerHome');
   }
 
   return (

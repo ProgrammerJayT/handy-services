@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState, useEffect} from 'react';
 
-const Home = ({navigation}) => {
+const CustomerHome = ({navigation}) => {
 
   const gotoRequest = () => {
     navigation.navigate('Request');
@@ -22,7 +22,7 @@ const Home = ({navigation}) => {
   );
 };
 
-export default Home;
+export default CustomerHome;
 
 const styles = StyleSheet.create({
   body: {
